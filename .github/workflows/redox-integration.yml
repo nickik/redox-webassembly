@@ -1,0 +1,19 @@
+name: redox integration
+
+on:
+  workflow_dispatch:
+
+jobs:
+  redox-wasmi-smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install QEMU
+        run: sudo apt-get update && sudo apt-get install -y qemu-system-x86
+      - name: Install redoxer
+        run: cargo install redoxer --locked
+      - name: Install Redox toolchain
+        run: redoxer toolchain
+      - name: Boot Redox and execute Wasmi smoke test
+        run: make redox-test

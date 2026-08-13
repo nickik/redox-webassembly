@@ -1,0 +1,12 @@
+#TODO: not compiled or tested; verify with the active Redox Cookbook before promotion.
+# WASI is intentionally disabled for the first Redox Wasmi package milestone.
+
+[source]
+git = "https://github.com/wasmi-labs/wasmi.git"
+rev = "v2.0.0-beta.10"
+
+[build]
+template = "custom"
+script = """
+cookbook_cargo -p wasmi_cli --no-default-features --features stable,run,validate,portable-dispatch
+"""
